@@ -1,0 +1,10 @@
+---
+description: Запрет PR в upstream CJFWeatherhead/TNI-Mods без явной просьбы
+alwaysApply: true
+---
+
+# No upstream PR
+
+- **Не создавать** pull request в `CJFWeatherhead/TNI-Mods`.
+- Push в upstream и force-push — только по явной просьбе.
+- PR в собственный репозиторий (`DefaultUsernameWasAleadyTaken/TNI-MM-Mods`) — только если пользователь попросил.

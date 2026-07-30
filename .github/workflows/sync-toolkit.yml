@@ -1,0 +1,51 @@
+name: Sync toolkit from upstream
+
+on:
+  schedule:
+    # Ежедневно в 06:00 UTC
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Sync toolkit
+        run: bash scripts/sync-toolkit.sh
+
+      - name: Detect changes
+        id: diff
+        run: |
+          if git diff --quiet && git diff --cached --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create Pull Request
+        if: steps.diff.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(toolkit): sync from CJFWeatherhead/TNI-Mods"
+          branch: chore/sync-toolkit
+          delete-branch: true
+          title: "chore(toolkit): sync from upstream TNI-Mods"
+          body: |
+            Автоматическая синхронизация `toolkit/` из [CJFWeatherhead/TNI-Mods](https://github.com/CJFWeatherhead/TNI-Mods).
+
+            - Сайт (`docs/`), Mod Manager и upstream `.github/` не копируются
+            - Корневые `mods/` (ваши моды) не затрагиваются
+
+            Upstream SHA: см. `toolkit/.upstream-sha`
+          base: main
+          labels: toolkit, automated

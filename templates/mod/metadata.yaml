@@ -1,0 +1,26 @@
+# Шаблон: замените my-mod / My Mod на свой id и название. ID = имя папки = id в mod.jsonc.
+Name: My Mod
+Description: |
+  Short description of what this mod does.
+
+Author: DefaultUsernameWasAleadyTaken
+Version: 0.1.0
+Creation Date: 2026-07-30
+Last Updated: 2026-07-30
+Website: https://github.com/DefaultUsernameWasAleadyTaken/TNI-MM-Mods/tree/beta/mods/my-mod
+Development Status: Active Development
+Game Version Supported: stable
+ID: my-mod
+Dependencies: []
+Notes: Copied from templates/mod — replace placeholders before release.
+Parameters:
+  - Name: greeting
+    Label: Greeting Text
+    Type: string
+    Default: "Hello from my-mod!"
+    Description: Message printed to the game log when the mod loads
+  - Name: debug_logging
+    Label: Enable Debug Logging
+    Type: boolean
+    Default: true
+    Description: Print extra messages on on_mod_load

@@ -1,0 +1,22 @@
+{
+	// Шаблон: замените my-mod / My Mod на свой id и название.
+	"id": "my-mod",
+	"name": "My Mod",
+	"authors": [ "DefaultUsernameWasAleadyTaken" ],
+	"version": "0.1.0",
+	"description": [
+		"Short description of what this mod does."
+	],
+	"links": {
+		"github": "https://github.com/DefaultUsernameWasAleadyTaken/TNI-MM-Mods/tree/beta/mods/my-mod"
+	},
+	"dependencies": {
+		// See https://devhints.io/semver for syntax.
+		"tower-networking-inc": "^0.10.7",
+		"luajit-support": "~0.2.0"
+	},
+	"dependencies_optional": {
+	},
+	"incompatibilities": {
+	}
+}

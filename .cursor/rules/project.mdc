@@ -1,0 +1,21 @@
+---
+description: TNI-MM-Mods — сторонняя библиотека модов, beta/main, toolkit
+alwaysApply: true
+---
+
+# TNI-MM-Mods — project rules
+
+- **Проект:** `DefaultUsernameWasAleadyTaken/TNI-MM-Mods` — сторонняя библиотека модов для Tower Networking Inc, совместимая с официальным [TNI-Mods](https://github.com/CJFWeatherhead/TNI-Mods).
+- **Ветки ([ADR-001](docs/decisions.md)):** `beta` — разработка; `main` — стабильная / default. Работай в **`beta`**, если не сказано иное.
+- **Язык с пользователем:** русский.
+- **Авто-режим:** не спрашивать подтверждения на рутину. **Commit/push запрещены**, пока нет явной просьбы в чате или подтверждения кнопкой в диалоге Cursor (см. `no-commit-push.mdc`).
+- **Scope ([ADR-002](docs/decisions.md)):**
+  - `mods/` — **ваши** моды (релизятся из этого репо);
+  - `toolkit/` — снимок upstream-тулкита (примеры, API, typing); **не** релизятся;
+  - `scripts/`, `.github/workflows/`, `docs/`, `AGENTS.md`, `.cursor/`.
+- **Не** возвращать сайт (Hugo/`docs` upstream), оригинальный Mod Manager, чужие CI релизов легаси-модов без нового ADR.
+- **Формат мода:** `entry.lua` + `mod.jsonc` + `metadata.yaml` + `README.md` (как upstream). Конфиг в `entry.lua` между маркерами `MOD CONFIGURATION`.
+- **Каталог для Mod Manager Plus:** релизы с тегом `modId-vX.Y.Z` и zip-ассетом; репа должна быть в `mod-sources.json` менеджера ([ADR-004](docs/decisions.md)).
+- **Toolkit sync:** `scripts/sync-toolkit.sh` + workflow sync → PR в `main`. Корневые `mods/` sync **не** трогает.
+- **Docs:** `docs/architecture.md`, `docs/decisions.md`, `docs/releasing.md`, `AGENTS.md`.
+- **Upstream PR** в `CJFWeatherhead/TNI-Mods` — не создавать без явной просьбы.
