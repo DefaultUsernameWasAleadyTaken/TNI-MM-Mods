@@ -12,7 +12,7 @@
 
 После появления релиза в менеджере нажать **Обновить** (или дождаться автообновления каталога).
 
-**Не попадают в MM+:** [`templates/`](../templates/) (заготовки) и [`toolkit/mods/`](../toolkit/mods/) (примеры upstream) — у них нет релизов/`release-*.yml`.
+**Не попадают в MM+:** [`templates/`](../templates/) (заготовки), [`toolkit/mods/`](../toolkit/mods/) (примеры kit) и [`examples/`](../examples/) (community) — у них нет релизов/`release-*.yml`.
 
 ---
 
@@ -31,7 +31,7 @@
    - `ID:` в `metadata.yaml`
    - `"id"` в `mod.jsonc`
 
-3. **Файлы мода** (как у upstream):
+3. **Файлы мода** (как у kit / community):
    - `entry.lua` — логика; конфиг между маркерами `MOD CONFIGURATION`
    - `mod.jsonc` — id, version, dependencies
    - `metadata.yaml` — Version, описание, Parameters

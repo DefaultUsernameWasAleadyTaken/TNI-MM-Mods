@@ -6,17 +6,18 @@ alwaysApply: true
 # TNI-MM-Mods — project rules
 
 - **Проект:** `DefaultUsernameWasAleadyTaken/TNI-MM-Mods` — сторонняя библиотека модов для Tower Networking Inc.
-- **Источники ([ADR-005](docs/decisions.md)):** официальный kit — [treefarmer741/Tower-Networking-Inc-modding-kit](https://github.com/treefarmer741/Tower-Networking-Inc-modding-kit); [CJFWeatherhead/TNI-Mods](https://github.com/CJFWeatherhead/TNI-Mods) — community (**не** называть официальным). Sync `toolkit/` пока с community.
+- **Источники ([ADR-005](docs/decisions.md)):** `toolkit/` ← официальный [treefarmer741/Tower-Networking-Inc-modding-kit](https://github.com/treefarmer741/Tower-Networking-Inc-modding-kit); `examples/` ← community [CJFWeatherhead/TNI-Mods](https://github.com/CJFWeatherhead/TNI-Mods) (**не** называть официальным).
 - **Ветки ([ADR-001](docs/decisions.md)):** `beta` — разработка; `main` — стабильная / default. Работай в **`beta`**, если не сказано иное.
 - **Язык с пользователем:** русский.
 - **Авто-режим:** не спрашивать подтверждения на рутину. **Commit/push запрещены**, пока нет явной просьбы в чате или подтверждения кнопкой в диалоге Cursor (см. `no-commit-push.mdc`).
 - **Scope ([ADR-002](docs/decisions.md)):**
   - `mods/` — **ваши** моды (релизятся из этого репо);
-  - `toolkit/` — снимок community TNI-Mods (примеры, API, typing); **не** релизятся;
+  - `toolkit/` — снимок официального kit (API, typing, programs); **не** релизятся;
+  - `examples/` — community-примеры; **не** релизятся;
   - `scripts/`, `.github/workflows/`, `docs/`, `AGENTS.md`, `.cursor/`.
 - **Не** возвращать сайт (Hugo/`docs` upstream), оригинальный Mod Manager, чужие CI релизов легаси-модов без нового ADR.
 - **Формат мода:** `entry.lua` + `mod.jsonc` + `metadata.yaml` + `README.md` (как kit / community). Конфиг в `entry.lua` между маркерами `MOD CONFIGURATION`.
 - **Каталог для Mod Manager Plus:** релизы с тегом `modId-vX.Y.Z` и zip-ассетом; репа должна быть в `mod-sources.json` менеджера ([ADR-004](docs/decisions.md)).
-- **Toolkit sync:** `scripts/sync-toolkit.sh` + workflow sync → PR в `main` (источник: community TNI-Mods). Корневые `mods/` sync **не** трогает.
+- **Sync:** `scripts/sync-all.sh` + workflow → PR в `main`. Корневые `mods/` sync **не** трогает.
 - **Docs:** `docs/architecture.md`, `docs/decisions.md`, `docs/releasing.md`, `AGENTS.md`.
 - **PR** в `CJFWeatherhead/TNI-Mods` или официальный kit — не создавать без явной просьбы.

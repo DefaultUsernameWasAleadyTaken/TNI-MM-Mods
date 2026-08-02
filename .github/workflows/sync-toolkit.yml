@@ -1,4 +1,4 @@
-name: Sync toolkit from upstream
+name: Sync toolkit and examples
 
 on:
   schedule:
@@ -19,8 +19,8 @@ jobs:
         with:
           ref: main
 
-      - name: Sync toolkit
-        run: bash scripts/sync-toolkit.sh
+      - name: Sync toolkit and examples
+        run: bash scripts/sync-all.sh
 
       - name: Detect changes
         id: diff
@@ -36,16 +36,18 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore(toolkit): sync from CJFWeatherhead/TNI-Mods"
-          branch: chore/sync-toolkit
+          commit-message: "chore: sync toolkit (official kit) + examples (community)"
+          branch: chore/sync-sources
           delete-branch: true
-          title: "chore(toolkit): sync from upstream TNI-Mods"
+          title: "chore: sync toolkit + community examples"
           body: |
-            Автоматическая синхронизация `toolkit/` из [CJFWeatherhead/TNI-Mods](https://github.com/CJFWeatherhead/TNI-Mods).
+            Автоматическая синхронизация:
 
-            - Сайт (`docs/`), Mod Manager и upstream `.github/` не копируются
-            - Корневые `mods/` (ваши моды) не затрагиваются
+            - `toolkit/` ← [treefarmer741/Tower-Networking-Inc-modding-kit](https://github.com/treefarmer741/Tower-Networking-Inc-modding-kit) (официальный kit)
+            - `examples/` ← `mods/` из [CJFWeatherhead/TNI-Mods](https://github.com/CJFWeatherhead/TNI-Mods) (community)
 
-            Upstream SHA: см. `toolkit/.upstream-sha`
+            Корневые `mods/` (ваши моды) не затрагиваются.
+
+            SHA: `toolkit/.upstream-sha`, `examples/.upstream-sha`
           base: main
-          labels: toolkit, automated
+          labels: toolkit, examples, automated

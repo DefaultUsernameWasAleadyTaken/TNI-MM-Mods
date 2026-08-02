@@ -3,7 +3,8 @@
 Сюда кладутся **публикуемые** моды этой библиотеки.
 
 Шаблоны для копирования — в [`templates/`](../templates/) (не релизятся, не видны MM+).  
-Примеры из upstream — в [`toolkit/mods/`](../toolkit/mods/).
+Примеры официального kit — [`toolkit/mods/`](../toolkit/mods/).  
+Community-примеры — [`examples/`](../examples/).
 
 Структура мода:
 

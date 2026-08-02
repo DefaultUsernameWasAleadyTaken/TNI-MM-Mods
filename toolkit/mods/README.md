@@ -1,6 +1,7 @@
-# Example mods (from upstream)
+# Example mods (official kit)
 
-Примеры модов из community [TNI-Mods](https://github.com/CJFWeatherhead/TNI-Mods) (**не** официальный kit; см. [ADR-005](../../docs/decisions.md)).
-**Не релизятся** из этого репозитория — только справочник по структуре, API и приёмам.
+Примеры из официального [Tower-Networking-Inc-modding-kit](https://github.com/treefarmer741/Tower-Networking-Inc-modding-kit).
+**Не релизятся** из этого репозитория.
 
-Свои моды кладите в корневой [`../../mods/`](../../mods/).
+Community-примеры — в [`../../examples/`](../../examples/).  
+Свои моды — в [`../../mods/`](../../mods/).

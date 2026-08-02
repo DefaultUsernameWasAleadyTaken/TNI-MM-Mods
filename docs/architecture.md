@@ -6,32 +6,35 @@
 
 ## Русский
 
-Сторонняя **библиотека модов** для Tower Networking Inc. Совместима с форматом Lua-модов сообщества и официального kit, но **не** является форком целиком: без сайта и без оригинального Mod Manager.
+Сторонняя **библиотека модов** для Tower Networking Inc. Совместима с форматом Lua-модов официального kit и community-примеров; **не** форк целиком: без сайта и без оригинального Mod Manager.
 
 ### Источники моддинга ([ADR-005](decisions.md))
 
 | Репозиторий | Статус | Роль для нас |
 |-------------|--------|--------------|
-| [treefarmer741/Tower-Networking-Inc-modding-kit](https://github.com/treefarmer741/Tower-Networking-Inc-modding-kit) | **Официальный kit** (подтверждено Pocosia Studios, 2026-07-31) | Канон API / Godot Sandbox; sync сюда — **пока не** переключали |
-| [CJFWeatherhead/TNI-Mods](https://github.com/CJFWeatherhead/TNI-Mods) | Community (вклад игроков, **не** официальный) | Текущий источник `toolkit/` |
+| [treefarmer741/Tower-Networking-Inc-modding-kit](https://github.com/treefarmer741/Tower-Networking-Inc-modding-kit) | **Официальный kit** (Pocosia Studios) | Источник `toolkit/` (API, typing, programs) |
+| [CJFWeatherhead/TNI-Mods](https://github.com/CJFWeatherhead/TNI-Mods) | Community (**не** официальный) | Источник `examples/` (`mods/` upstream) |
 | [libriscv/godot-sandbox](https://github.com/libriscv/godot-sandbox) | Стек игры | Sandbox моддинга |
 
 | Область | Путь | Роль |
 |---------|------|------|
 | Наши моды | `mods/<mod-id>/` | исходники + релизы GitHub |
-| Тулкит | `toolkit/` | снимок **community** TNI-Mods (API, typing, примеры) |
-| Примеры | `toolkit/mods/` | только справочник, **не** релизятся |
-| Sync | `scripts/sync-toolkit.sh` | ручная синхронизация toolkit |
+| Тулкит | `toolkit/` | снимок **официального** kit |
+| Примеры kit | `toolkit/mods/` | официальные примеры, **не** релизятся |
+| Community-примеры | `examples/` | снимок community `mods/`, **не** релизятся |
+| Sync toolkit | `scripts/sync-toolkit.sh` | из официального kit |
+| Sync examples | `scripts/sync-examples.sh` | из community TNI-Mods |
+| Sync оба | `scripts/sync-all.sh` | toolkit + examples |
 | CI sync | `.github/workflows/sync-toolkit.yml` | ежедневно → PR в `main` |
 | CI мод | `.github/workflows/release-<mod>.yml` | релиз мода с `main` (`modId-vX.Y.Z`) |
 | IDE Lua | `.luarc.json` → `toolkit/lua-typing` | автодополнение |
 | Docs | `docs/`, `AGENTS.md` | архитектура, ADR, релизы |
 
 ```text
-офиц. kit (treefarmer741)     — канон, sync TBD
-community TNI-Mods  --(filter)-->  toolkit/   ← сейчас
-                                      ^
-                                      | sync Action / script
+офиц. kit (treefarmer741)  --(filter)-->  toolkit/
+community TNI-Mods/mods/   --(sync)---->  examples/
+                                              ^
+                                              | sync-all / CI
 наша библиотека  mods/  --(release zip)-->  GitHub Releases
                                               |
                                     TNI-ModManager-Plus (mod-sources.json)
@@ -51,4 +54,4 @@ community TNI-Mods  --(filter)-->  toolkit/   ← сейчас
 
 ## English
 
-Third-party mod library. Official kit is treefarmer741/Tower-Networking-Inc-modding-kit; CJFWeatherhead/TNI-Mods is community (current `toolkit/` sync source). Own mods in `mods/`; releases use `modId-vX.Y.Z` for Mod Manager Plus. See ADR-005.
+Third-party mod library. `toolkit/` syncs from the official treefarmer741 kit; `examples/` syncs community mods from CJFWeatherhead/TNI-Mods. Own mods in `mods/`; releases use `modId-vX.Y.Z` for Mod Manager Plus. See ADR-005.

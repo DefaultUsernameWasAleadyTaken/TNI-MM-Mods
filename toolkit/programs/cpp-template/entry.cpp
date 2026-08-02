@@ -1,4 +1,4 @@
-﻿#include <api.hpp>
+#include <api.hpp>
 
 #include "tower.hpp"
 
