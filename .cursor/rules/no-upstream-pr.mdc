@@ -1,10 +1,10 @@
 ---
-description: Запрет PR в upstream CJFWeatherhead/TNI-Mods без явной просьбы
+description: Запрет PR во внешние TNI-репо без явной просьбы
 alwaysApply: true
 ---
 
 # No upstream PR
 
-- **Не создавать** pull request в `CJFWeatherhead/TNI-Mods`.
-- Push в upstream и force-push — только по явной просьбе.
+- **Не создавать** pull request в `CJFWeatherhead/TNI-Mods` (community) и в официальный [Tower-Networking-Inc-modding-kit](https://github.com/treefarmer741/Tower-Networking-Inc-modding-kit) без явной просьбы.
+- Push во внешние репо и force-push — только по явной просьбе.
 - PR в собственный репозиторий (`DefaultUsernameWasAleadyTaken/TNI-MM-Mods`) — только если пользователь попросил.

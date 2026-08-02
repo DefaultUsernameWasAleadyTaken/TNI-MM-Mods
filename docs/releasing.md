@@ -23,7 +23,7 @@
 | [`templates/mod/`](../templates/mod/) | заготовка файлов мода |
 | [`templates/release-mod.yml.example`](../templates/release-mod.yml.example) | скопировать в `.github/workflows/release-<mod-id>.yml`, заменить `__MOD_ID__` |
 
-`templates/` и `toolkit/mods/` **не** публикуются в MM+.
+`templates/`, `toolkit/mods/` и `examples/` **не** публикуются в MM+.
 
 Ручной пакет (с `main`):
 
@@ -46,9 +46,9 @@ gh release create <mod-id>-v0.1.0 <mod-id>-0.1.0.zip \
 3. Workflow из `templates/release-mod.yml.example`.
 4. Merge в `main` → «Обновить» в Mod Manager Plus.
 
-## Toolkit sync (не релизы модов)
+## Toolkit / examples sync (не релизы модов)
 
-Синхронизация `toolkit/` — [`sync-toolkit.yml`](../.github/workflows/sync-toolkit.yml). См. [architecture.md](architecture.md).
+Синхронизация `toolkit/` + `examples/` — [`sync-toolkit.yml`](../.github/workflows/sync-toolkit.yml) (`scripts/sync-all.sh`). См. [architecture.md](architecture.md).
 
 ## Связанное
 

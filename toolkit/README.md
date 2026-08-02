@@ -4,160 +4,56 @@ This repository is a modding kit that can be used to create mods for the game [T
 
 Mods are created in C/C++, however this repository also contains the official LuaJIT support mod. Lua mods are preferred as they are easier to develop and are naturally source-available.
 
-Note that modding for the game is still in early design/implementation stage.
-
-## Mod Manager v3.0
-
-This repository includes a modern WPF-based **[Mod Manager](ModManager-README.md)** that can download mods directly from GitHub releases and manage local installations.
-
-### Features
-
-- 🌐 **GitHub Integration**: Browse, download, and update mods from releases
-- 📊 **Progress Bars**: Visual feedback during mod downloads
-- 🎨 **Visual Distinctions**: Color-coded mods (Downloaded/Manual/Available)
-- ⚙️ **Parameter Configuration**: Configure mod settings through the GUI
-- 🚀 **One-Click Launch**: Start the game directly from the manager
-
-### Quick Start
-
-1. Double-click `ModManager.bat` to launch
-2. Available mods from GitHub releases appear in gray
-3. Click a mod and press **Download** to install
-4. Installed mods show as blue (downloaded) or purple (manual)
-5. Configure parameters and click **Save Changes**
-
-### Mod Sources
-
-| Source | Color | Behavior |
-|--------|-------|----------|
-| **Downloaded** | Blue | Installed from GitHub releases. Deleted when removed. |
-| **Manual** | Purple | Manually installed. Moved to disabled folder when disabled. |
-| **Available** | Gray | Not installed. Can be downloaded from GitHub. |
-
-For full documentation, see:
-
-- [ModManager-README.md](ModManager-README.md) - Complete mod manager guide
-- [CONFIG-SYSTEM.md](CONFIG-SYSTEM.md) - Configuration system architecture
+Note that modding for the game is still in early design/implementation stage, and any feedback/suggestions is encouraged to make modding the game fun!
 
 ## Using Lua based mods
 
-If you want to use a Lua based mods, you will need to manually add the `luajit` support mod first. This may be improved in the future.
+If you want to use a Lua based mods, you will need to manually add the `luajit-support` mod first. This process will be improved in the future.
 
-You can find the mod in the github releases, or [click here](https://github.com/CJFWeatherhead/TNI-Mods/releases/tag/continuous-gnu-main) for the latest release. Download the luajit-support zip and extract it into your mods folder. Refer to [Loading the mod](#loading-the-mod) for further instructions.
+You can find the mod in the github releases, or [click here](https://github.com/treefarmer741/Tower-Networking-Inc-modding-kit/releases/tag/continuous-gnu-main) for the latest stable release. Download the luajit file and place it in your mods folder. Refer to [Loading the mod](#loading-the-mod) for further instructions.
 
-## Stable Branch Support
+If you are using the `beta` branch of the game, you'll likely want to use the ["Continuous (gnu) - beta"](https://github.com/treefarmer741/Tower-Networking-Inc-modding-kit/releases/tag/continuous-gnu-beta) release instead.
 
-Mods are now fully supported on the stable branch of Tower Networking Inc on Steam. No beta opt-in is required.
+## Beta branch
 
-## Automated Mod Releases
+There is a `beta` github branch which should work with the game's `beta` branch on steam.
 
-Each mod in the `/lua` directory has its own automated release workflow. When you push changes to a mod:
+Changes to the modding-kit go through the beta branch first.
 
-1. **Version is automatically incremented** (using semantic versioning)
-2. **Last Updated date is set** to the current date
-3. **Mod is packaged** into a versioned zip file
-4. **GitHub release is created** with download links
-5. **Documentation is updated** with the latest release links
+## Example mods
 
-For more details, see [.github/MOD-RELEASE-SYSTEM.md](.github/MOD-RELEASE-SYSTEM.md).
+Examples are your friend. To get started, take a look at the following examples:
 
-### Manual Releases
+### 2x BW switches (Lua)
 
-You can also trigger releases manually:
-1. Go to the **Actions** tab
-2. Select your mod's workflow (e.g., "Release money-cheat")
-3. Click **Run workflow** and choose version bump type (major/minor/patch)
+The [2x BW switches](/mods/2x-bandwidth-switches/) mod doubles the bandwidth of every switch when spawned in. The store display the original value!
 
----
+### C++ Template mod (C/C++)
 
-## Creating Lua Mods
+The [Template mod](/programs/cpp-template/) is a template that contains the common use scenario for writing a mod in c/c++.
 
-### Mod Structure Standards
+### LuaJIT support mod (C/C++)
 
-All Lua mods follow this structure:
+The [LuaJIT support mod](/programs/luajit-support/) adds Lua based mods. It is much more complex but may help with things the template doesn't have.
 
-```
-mods/<mod-name>/
-├── entry.lua          # Main mod file (REQUIRED)
-├── mod.jsonc          # Mod metadata for game loader (REQUIRED)
-├── metadata.yaml      # Extended mod metadata (REQUIRED)
-├── README.md          # Mod documentation (REQUIRED)
-└── ui-config.ps1      # Custom UI config (OPTIONAL, for complex configs)
-```
+### LuaJIT support mod (C/C++)
 
-#### Required Files
-
-**entry.lua** - Main mod implementation
-
-- Must be a single, self-contained Lua file
-
-- Configuration options must be in a marked section:
-  
-  ```lua
-  -- ===== MOD CONFIGURATION START =====
-  -- This section is parsed and modified by ModManager
-  -- Do not remove the configuration markers
-  
-  local config = {
-      param1 = true,
-      param2 = 2.0,
-      param3 = "value"
-  }
-  
-  -- ===== MOD CONFIGURATION END =====
-  ```
-
-**metadata.yaml** - Mod metadata
-
-- Follow the schema in [mod-metadata-schema.yaml](mod-metadata-schema.yaml)
-- Must include: Name, Description, Author, **Version**, Creation Date, Last Updated, Development Status, Game Version Supported, ID
-- **Version** field uses semantic versioning (e.g., "1.0.0") and is auto-incremented by release workflows
-- Parameters section defines configurable options (used by basic ModManager UI)
-
-**README.md** - User documentation
-
-- Describe what the mod does
-- List features
-- Explain installation and usage
-- Include compatibility information
-- Document any special configuration
-
-#### Optional Files
-
-**ui-config.ps1** - Custom configuration UI
-
-- Only needed for complex mods with conditional parameters
-- Defines UI elements in PowerShell (not in metadata.yaml)
-- See [device-tweaker/ui-config.ps1](mods/device-tweaker/ui-config.ps1) for examples
-
-
-### Configuration Best Practices
-
-1. **Keep it simple**: Most mods should use the Parameters section in metadata.yaml
-2. **Use marked sections**: Always use the `MOD CONFIGURATION START/END` markers in entry.lua
-3. **Type-safe defaults**: Provide sensible defaults for all parameters
-4. **Document parameters**: Add clear descriptions in metadata.yaml
-5. **Use ui-config.ps1 only when needed**: For conditional/dynamic parameter visibility
+The [LuaJIT support mod](/programs/luajit) adds Lua based mods. It is much more complex but may help with things the template doesn't have.
 
 ---
 
 ## Loading the mod
 
-Mods in the game will be loaded from the user's game directory in alphabetical order.
+TNI will search for mods in the following locations;
 
-- Windows: `%APPDATA%\Godot\app_userdata\Tower Networking Inc`
+- Windows: `%APPDATA%\Godot\app_userdata\Tower Networking Inc\mods`
+- Linux: `~/.local/share/godot/app_userdata/Tower Networking Inc/mods`
 
-- Linux: `~/.local/share/godot/app_userdata/Tower Networking Inc`
+You should have the following structure after placing the mod in the correct folder (replacing `cpp-template` with the given mod);
 
-On the user's game directory, you'll observe directories like `saves/` and `logs/`. Place your mod in the `mods/` directory.
+`.../Tower Networking Inc/mods/cpp-template/mod.jsonc`
 
-For example, to install the `cpp-template` mod, place `.zig/cpp-template` to `mods/` such that `mods/cpp-template/entry.elf` exists.
-
-### Lua mods
-
-If you'd like to use Lua instead, you can download the [luajit-support mod](https://github.com/CJFWeatherhead/TNI-Mods/releases/download/continuous-gnu-main/luajit-support.zip) from the releases section and extract it into your `mods/` directory so that `mods/luajit-support/luajit-support.elf` exists. This enables loading of `.lua` mods.
-
-The engine will always first try to load `luajit-support` before other mods, so you do not need to worry about the naming.
+If you are using a Lua based mod, please see the instructions at [Using Lua based mods](#using-lua-based-mods)
 
 ---
 
@@ -169,9 +65,11 @@ To clone and initialize the repository locally;
 
 ```sh
 # Ensure you have `git` installed.
-git clone https://github.com/CJFWeatherhead/TNI-Mods.git --branch main
+git clone https://github.com/treefarmer741/Tower-Networking-Inc-modding-kit.git --branch main
 git submodule update --init --recursive
 ```
+
+Replace `--branch main` with `--branch beta` if you are playing on the beta branch of the game.
 
 ### Windows
 
@@ -185,10 +83,8 @@ Make sure the following is installed:
 Then in the root of this project, run the command:
 
 ```
-build-zig.cmd
+zig.cmd
 ```
-
-The built output (a .elf file) will be in the `.zig/<name-of-your-mod>/entry.elf` directory.
 
 ### Linux (and WSL2)
 
@@ -207,5 +103,46 @@ sudo apt install git cmake ninja-build g++-riscv64-linux-gnu-14
 Then in the root of this project, run the command:
 
 ```sh
-./build-gnu.sh
+./build.cmd
 ```
+
+#
+
+The built output (a .elf file) will be in the `./mods/<id-of-the-mod>/entry.elf` directory.
+
+There also exists `copy-mods.cmd` (Windows) and `copy-mods.sh` (Linux & WSL) to copy the mods in `./mods/` to the games `mods/` directory.
+
+---
+
+## Creating your own C++ mod
+
+*See below this section for Lua mods.*
+
+- Start by copying the [`./mods/cpp-template`](./mods/cpp-template/) and [`./programs/cpp-template`](./programs/cpp-template/) and rename both folders to your new mod-id.
+- Edit `./mods/my_mod_id/mod.jsonc` and update all the information (especially the `"id"` section!)
+- Edit [`./programs/CMakeLists.txt`](./programs/CMakeLists.txt) and add `add_subdirectory(my_mod_id)` to the bottom.
+- Edit `./programs/my_mod_id/CMakeLists.txt` and change both occurrences of `cpp-template` to match your mod-id and folder name.
+- Finally, [build it!](#building-cc-mods)
+- If the build was successful, you should have `./mods/my_mod_id/entry.elf`
+- Copy the folder either by using `copy-mods.cmd`/`copy-mods.sh` or doing so manually.
+- Use the in-game Mod Manager to enable your new mod and reload.
+- You should see a popup "Hello from a C++ tni mod!"
+- From here, you can edit `./programs/my_mod_id/entry.cpp` to make your mod do something new!
+
+---
+
+## Creating your own Lua mod
+
+- Start by copying [`./mods/2x-bandwidth-switches`](./mods/2x-bandwidth-switches/) into your games mods directory and renaming it to what will be your new mod-id.
+- If you use any of Sumneko's Lua extensions, copy [`./lua-typing/`](./lua-typing/) into the games mods directory as well (it's not a mod)
+- Edit `mods/my_mod_id/mod.jsonc` and update all the information (especially the `"id"` section!)
+- Use the in-game Mod Manager to enable your new mod and reload.
+- When viewing the log, you should see "High BW capacity switches!" when the mod loads. When in-game, all switches should have 2x the bandwidth!
+- From here, you can edit `mods/my_mod_id/entry.lua` to make your mod do something new!
+
+---
+
+## Modding tips
+
+- It can be very helpful to launch the game via a console window. This allows to view the log output live! Otherwise you'll need to monitor `logs/godot.log` in a text editor.
+- For Lua mods, use one of [Sumneko's Lua extensions](https://github.com/LuaLS/lua-language-server) to get rich integration with your editor, allowing for error checking and auto-complete and more. (we provide the typing info in [`./lua-typing/`](./lua-typing/))

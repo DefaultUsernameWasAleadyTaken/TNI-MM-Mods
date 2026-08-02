@@ -1,6 +1,6 @@
 /*
 ** Public Lua/C API.
-** Copyright (C) 2005-2026 Mike Pall. See Copyright Notice in luajit.h
+** Copyright (C) 2005-2025 Mike Pall. See Copyright Notice in luajit.h
 **
 ** Major portions taken verbatim or adapted from the Lua interpreter.
 ** Copyright (C) 1994-2008 Lua.org, PUC-Rio. See Copyright Notice in lua.h
@@ -416,7 +416,11 @@ LUA_API lua_Integer lua_tointeger(lua_State *L, int idx)
       return intV(&tmp);
     n = numV(&tmp);
   }
-  return lj_num2int_type(n, lua_Integer);
+#if LJ_64
+  return (lua_Integer)n;
+#else
+  return lj_num2int(n);
+#endif
 }
 
 LUA_API lua_Integer lua_tointegerx(lua_State *L, int idx, int *ok)
@@ -441,7 +445,11 @@ LUA_API lua_Integer lua_tointegerx(lua_State *L, int idx, int *ok)
     n = numV(&tmp);
   }
   if (ok) *ok = 1;
-  return lj_num2int_type(n, lua_Integer);
+#if LJ_64
+  return (lua_Integer)n;
+#else
+  return lj_num2int(n);
+#endif
 }
 
 LUALIB_API lua_Integer luaL_checkinteger(lua_State *L, int idx)
@@ -460,7 +468,11 @@ LUALIB_API lua_Integer luaL_checkinteger(lua_State *L, int idx)
       return (lua_Integer)intV(&tmp);
     n = numV(&tmp);
   }
-  return lj_num2int_type(n, lua_Integer);
+#if LJ_64
+  return (lua_Integer)n;
+#else
+  return lj_num2int(n);
+#endif
 }
 
 LUALIB_API lua_Integer luaL_optinteger(lua_State *L, int idx, lua_Integer def)
@@ -481,7 +493,11 @@ LUALIB_API lua_Integer luaL_optinteger(lua_State *L, int idx, lua_Integer def)
       return (lua_Integer)intV(&tmp);
     n = numV(&tmp);
   }
-  return lj_num2int_type(n, lua_Integer);
+#if LJ_64
+  return (lua_Integer)n;
+#else
+  return lj_num2int(n);
+#endif
 }
 
 LUA_API int lua_toboolean(lua_State *L, int idx)
