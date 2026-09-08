@@ -13,7 +13,7 @@
 
 - **`beta`** — рабочая ветка разработки.
 - **`main`** — стабильная линия и **default** на GitHub.
-- Sync toolkit/examples workflow открывает PR в **`main`**.
+- Sync toolkit/examples workflow коммитит прямо в **`main`**.
 - **Релизы модов** (`release-*.yml`) — только с **`main`** (push или `workflow_dispatch` с `--target main`). Поток: разработка на `beta` → merge в `main` → CI → MM+ Обновить.
 
 ### Почему
@@ -46,11 +46,11 @@
 
 ---
 
-## ADR-003: Автосинхронизация toolkit и examples через PR
+## ADR-003: Автосинхронизация toolkit и examples → commit в `main`
 
 | Поле | Значение |
 |------|----------|
-| **Статус** | Принято (обновлено 2026-08-02) |
+| **Статус** | Принято (обновлено 2026-09-08) |
 | **Дата** | 2026-07-30 |
 
 ### Решение
@@ -60,14 +60,14 @@ GitHub Action ежедневно (и вручную) запускает [`script
 1. `toolkit/` ← официальный kit (`sync-toolkit.sh`);
 2. `examples/` ← community TNI-Mods `mods/` (`sync-examples.sh`);
 
-при изменениях открывает **PR в `main`** (не прямой push). Корневые `mods/` не затрагиваются.
+при изменениях делает **commit и push в `main`**. Корневые `mods/` не затрагиваются.
 
 Скрипты: [`sync-toolkit.sh`](../scripts/sync-toolkit.sh), [`sync-examples.sh`](../scripts/sync-examples.sh), [`sync-all.sh`](../scripts/sync-all.sh).  
 Workflow: [`.github/workflows/sync-toolkit.yml`](../.github/workflows/sync-toolkit.yml).
 
 ### Почему
 
-Безопасный просмотр диффа перед мержем; свои моды не затираются; два источника не конфликтуют.
+`toolkit/` и `examples/` — зеркала upstream, ручной review PR избыточен. Прямой commit убирает ежедневные failed/open PR. Свои моды по-прежнему не затираются; два источника не конфликтуют.
 
 ---
 

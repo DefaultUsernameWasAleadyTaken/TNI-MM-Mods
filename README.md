@@ -26,7 +26,7 @@ TNI-MM-Mods/
 │   ├── sync-all.sh       # оба sync
 │   └── sync-lib.sh       # rsync / cp fallback
 ├── .github/workflows/
-│   └── sync-toolkit.yml  # ежедневный sync + PR
+│   └── sync-toolkit.yml  # ежедневный sync → commit в main
 └── toolkit/              # снимок официального kit
     ├── mods/             # примеры kit (не релизятся)
     ├── lua-typing/       # типы Lua для IDE
@@ -44,7 +44,7 @@ TNI-MM-Mods/
 
 1. `toolkit/` ← официальный kit (`treefarmer741/…`)
 2. `examples/` ← `mods/` community TNI-Mods
-3. При изменениях — PR в `main` (`chore/sync-sources`)
+3. При изменениях — commit прямо в `main`
 
 Корневые `mods/` workflow **не трогает**.
 

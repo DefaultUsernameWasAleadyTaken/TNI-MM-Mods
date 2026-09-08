@@ -25,7 +25,7 @@
 | Sync toolkit | `scripts/sync-toolkit.sh` | из официального kit |
 | Sync examples | `scripts/sync-examples.sh` | из community TNI-Mods |
 | Sync оба | `scripts/sync-all.sh` | toolkit + examples |
-| CI sync | `.github/workflows/sync-toolkit.yml` | ежедневно → PR в `main` |
+| CI sync | `.github/workflows/sync-toolkit.yml` | ежедневно → commit в `main` |
 | CI мод | `.github/workflows/release-<mod>.yml` | релиз мода с `main` (`modId-vX.Y.Z`) |
 | IDE Lua | `.luarc.json` → `toolkit/lua-typing` | автодополнение |
 | Docs | `docs/`, `AGENTS.md` | архитектура, ADR, релизы |
